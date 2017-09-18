@@ -71,8 +71,8 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " vimtex
 let g:tex_flavor='latex'
-"let g:vimtex_view_method='zathura'
-let g:vimtex_view_method='mupdf'
+let g:vimtex_view_method='zathura'
+" let g:vimtex_view_method='mupdf'
 let g:vimtex_latexmk_continuous=1
 let g:vimtex_latexmk_background=1
 "let g:vimtex_complete_recursive_bib=1

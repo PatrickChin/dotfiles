@@ -7,7 +7,7 @@ ZSH=/usr/share/oh-my-zsh/
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="blinks"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -88,7 +88,7 @@ export EDITOR="$VISUAL"
 
 alias firmwarereboot="sudo systemctl reboot --firmware-setup"
 alias cpycm="cp ~/.vim/.ycm_extra_conf1.py ./.ycm_extra_conf.py"
-alias cpnum="echo '+44 7464 30404' | xsel -i -b"
+alias cpnum="echo '0746 430 4048' | xsel -i -b"
 alias info="info --vi-keys"
 alias za=zathura
 alias r=ranger
