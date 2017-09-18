@@ -23,7 +23,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim' " ? idk what this is for
 Plug 'honza/vim-snippets'
-" Plug 'ervandew/supertab'
+Plug 'ervandew/supertab'
 " Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/a.vim'
 
@@ -49,10 +49,10 @@ command! YcmOn call plug#load('YouCompleteMe')
 " Plugin Variables {{{
 
 " airline
-let g:airline_powerline_fonts=0
+let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
+" let g:airline_left_sep=''
+" let g:airline_right_sep=''
 let g:airline_theme='base16_ocean'
 
 " youcompleteme
@@ -62,7 +62,7 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 
 " supertab
-let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabDefaultCompletionType = '<tab>'
 
 " utilsnips
 let g:UltiSnipsExpandTrigger = "<tab>"
