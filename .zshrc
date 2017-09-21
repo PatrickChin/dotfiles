@@ -2,7 +2,9 @@
 autoload -Uz promptinit
 promptinit
 prompt grml
-zstyle ':prompt:grml:left:setup' items newline jobs path vcs newline change-root user at host percent
+zstyle ':prompt:grml:left:setup' items newline\
+	change-root user at host path vcs newline\
+	percent
 
 
 # use the vi navigation keys (hjkl) besides cursor keys in menu completion
@@ -27,6 +29,11 @@ bindkey . rationalise-dot
 # without this, typing a . aborts incremental history search
 bindkey -M isearch . self-insert
 
+function swap()
+{
+    local TMPFILE=tmp.$$
+    mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE $2
+}
 
 export VISUAL=nvim
 export EDITOR="$VISUAL"
