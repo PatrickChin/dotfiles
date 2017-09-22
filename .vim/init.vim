@@ -8,41 +8,29 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+	Plug 'tpope/vim-sensible'
+	Plug 'tpope/vim-surround'
+	Plug 'tpope/vim-commentary'
+	Plug 'tpope/vim-fugitive'
+	Plug 'tpope/vim-markdown'
+	Plug 'tpope/vim-repeat'
+	Plug 'maxbrunsfeld/vim-emacs-bindings'
+	Plug 'vim-scripts/a.vim'
+	Plug 'Ron89/thesaurus_query.vim'
+	Plug 'Raimondi/delimitMate'
 
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround' 
-Plug 'tpope/vim-commentary' 
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-repeat'
+	Plug 'honza/vim-snippets'
+	Plug 'rbonvall/snipmate-snippets-bib'
+	Plug 'SirVer/ultisnips'
+	Plug 'vim-pandoc/vim-pandoc'
+	Plug 'lervag/vimtex'
+	Plug 'davidhalter/jedi-vim'
+	Plug 'Valloric/YouCompleteMe'
 
-Plug 'maxbrunsfeld/vim-emacs-bindings'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim' " ? idk what this is for
-Plug 'honza/vim-snippets'
-Plug 'ervandew/supertab'
-" Plug 'kien/ctrlp.vim'
-Plug 'vim-scripts/a.vim'
-
-Plug 'Ron89/thesaurus_query.vim'
-
-Plug 'honza/vim-snippets'
-Plug 'rbonvall/snipmate-snippets-bib'
-Plug 'SirVer/ultisnips'
-
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'lervag/vimtex'
-Plug 'davidhalter/jedi-vim'
-Plug 'Valloric/YouCompleteMe' , { 'on': [] }
-
-Plug 'nanotech/jellybeans.vim'
-
+	Plug 'nanotech/jellybeans.vim'
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
 call plug#end()
-
-command! YcmOn call plug#load('YouCompleteMe')
 
 " }}}
 
@@ -51,35 +39,29 @@ command! YcmOn call plug#load('YouCompleteMe')
 " airline
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
-" let g:airline_left_sep=''
-" let g:airline_right_sep=''
 let g:airline_theme='base16_ocean'
 
 " youcompleteme
-let g:ycm_confirm_extra_conf=0
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf1.py'
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-
-" supertab
-let g:SuperTabDefaultCompletionType = '<tab>'
+let g:ycm_auto_trigger=0
+let g:ycm_confirm_extra_conf=1
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+let g:ycm_warning_symbol='>'
 
 " utilsnips
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " vimtex
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
-" let g:vimtex_view_method='mupdf'
 let g:vimtex_latexmk_continuous=1
 let g:vimtex_latexmk_background=1
-"let g:vimtex_complete_recursive_bib=1
-"let g:vimtex_viewer_mupdf='@pdf'
 
 " jedi
-let g:jedi#force_py_version = 3
+let g:jedi#force_py_version=3
 
 " }}}
 
@@ -92,16 +74,14 @@ set noswapfile
 
 set textwidth=80
 set colorcolumn=+1
-" set colorcolumn=81
 
-" set clipboard=unnamedplus
 set mouse=a
 set hidden
 set number
 set relativenumber
 set nowrap
 set ignorecase
-" set smartcase
+set smartcase
 
 set autochdir
 set autoread
@@ -134,7 +114,6 @@ set nostartofline
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-" set expandtab
 
 set modelines=3
 
@@ -164,6 +143,7 @@ nnoremap <Space> i<Space><Esc>l
 nnoremap <CR> i<CR><Esc>
 
 nnoremap <leader>ev :e ~/.vimrc<cr>
+nnoremap <leader>ey :e ~/.vim/.ycm_extra_conf.py<cr>
 nnoremap <leader>es :Lex ~/.vim/plugged/vim-snippets/UltiSnips/<cr>
 nnoremap <leader>s :source %<cr>
 nnoremap <leader><S-s> :source %<cr>:PlugInstall<cr>
@@ -172,7 +152,6 @@ nnoremap <leader><S-s> :source %<cr>:PlugInstall<cr>
 nnoremap <silent> <Leader>yy :YcmOn<CR>
 nnoremap <silent> <Leader>yd :YcmCompleter GetDoc<CR>
 nnoremap <silent> <Leader>yf :YcmCompleter FixIt<CR>
-" nnoremap <silent> <Leader>yg :YcmCompleter GoTo<CR>
 nnoremap <silent> <Leader>yi :YcmCompleter GoToInclude<CR>
 nnoremap <silent> <Leader>yt :YcmCompleter GetType<CR>
 nnoremap <silent> <leader>jd :YcmCompleter GoTo<CR>
@@ -183,8 +162,6 @@ vnoremap aa mz<Esc>ggVG
 
 nnoremap <leader>y mzggVGy`z
 nnoremap <leader>Y mzggVG"+y`z
-" nnoremap <leader>d mzggVGy`z
-" nnoremap <leader>Y mzggVG"+y`z
 
 inoremap kj <Esc>
 cnoremap kj <Esc>
@@ -210,13 +187,13 @@ autocmd BufNewFile,BufFilePre,BufRead *.sty set filetype=tex
 autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 autocmd Filetype markdown nnoremap <buffer> <leader>ll :!pandoc % -o notes.html --mathjax -s
 
-autocmd FileType c,cpp setlocal commentstring=//%s
 autocmd FileType matlab setlocal commentstring=\%%s
 autocmd FileType cmake setlocal commentstring=\#%s
-autocmd FileType vimperator setlocal commentstring=\"\ %s
 
 autocmd BufNewFile,BufRead /usr/include/** set ft=cpp ts=8
 autocmd BufNewFile,BufRead /home/patrick/src/coreutils/** set ts=8
+autocmd BufNewFile,BufRead /home/patrick/workspace/programming-challenges/**
+			\ set expandtab
 autocmd BufNewFile,BufRead /home/patrick/workspace/sptr-analysis/**
 			\ set tabstop=8 softtabstop=2 shiftwidth=2
 
