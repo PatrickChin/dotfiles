@@ -25,9 +25,9 @@ flags = [
 '-Wall', '-Wextra', '-Werror', '-fexceptions', '-DNDEBUG',
 '-std=c++1z',
 '-x', 'c++',
-'-isystem', '/usr/include',
-'-isystem', '/usr/include/c++/7.1.1',
-'-isystem', '/usr/local/include',
+'-I', '/usr/include',
+'-I', '/usr/include/c++/7.1.1',
+'-I', '/usr/local/include',
 '-I', '.',
 '-I', './include',
 ]
