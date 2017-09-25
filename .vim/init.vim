@@ -17,7 +17,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'maxbrunsfeld/vim-emacs-bindings'
 	Plug 'vim-scripts/a.vim'
 	Plug 'Ron89/thesaurus_query.vim'
-	Plug 'Raimondi/delimitMate'
 
 	Plug 'honza/vim-snippets'
 	Plug 'rbonvall/snipmate-snippets-bib'
@@ -26,6 +25,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'lervag/vimtex'
 	Plug 'davidhalter/jedi-vim'
 	Plug 'Valloric/YouCompleteMe'
+	Plug 'ervandew/eclim'
 
 	Plug 'nanotech/jellybeans.vim'
 	Plug 'vim-airline/vim-airline'
@@ -43,11 +43,14 @@ let g:airline_theme='base16_ocean'
 
 " youcompleteme
 let g:ycm_auto_trigger=0
-let g:ycm_confirm_extra_conf=1
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-let g:ycm_key_list_select_completion=['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion=['<C-p>', '<Up>']
+" let g:ycm_confirm_extra_conf=1
+" let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf1.py'
+let g:ycm_key_list_select_completion=['<C-n>']
+let g:ycm_key_list_previous_completion=['<C-p>']
 let g:ycm_warning_symbol='>'
+
+" eclim
+let g:EclimCompletionMethod='omnifunc'
 
 " utilsnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -72,8 +75,7 @@ colorscheme jellybeans
 set nobackup
 set noswapfile
 
-set textwidth=80
-set colorcolumn=+1
+set colorcolumn=80
 
 set mouse=a
 set hidden
@@ -101,6 +103,8 @@ set wildignore+=*.iso,*.zip,*.gz
 set wildignore+=*.aux
 set wildignore+=*.jpg,*.png,*.gif,*.pdf
 set wildignore+=*.mp3,*.m4a,*.mp4
+set wildignore+=*.aux,*.lof,*.lot,*.fls,*.out,*.toc,*.fmt,*.fot,*.cb,*.cb2
+
 
 set dictionary+=/usr/share/dict/words
 
@@ -142,7 +146,7 @@ nnoremap <C-l> <C-w>l
 nnoremap <Space> i<Space><Esc>l
 nnoremap <CR> i<CR><Esc>
 
-nnoremap <leader>ev :e ~/.vimrc<cr>
+nnoremap <leader>ev :e ~/.vim/init.vim<cr>
 nnoremap <leader>ey :e ~/.vim/.ycm_extra_conf.py<cr>
 nnoremap <leader>es :Lex ~/.vim/plugged/vim-snippets/UltiSnips/<cr>
 nnoremap <leader>s :source %<cr>
@@ -190,7 +194,8 @@ autocmd Filetype markdown nnoremap <buffer> <leader>ll :!pandoc % -o notes.html 
 autocmd FileType matlab setlocal commentstring=\%%s
 autocmd FileType cmake setlocal commentstring=\#%s
 
-autocmd BufNewFile,BufRead /usr/include/** set ft=cpp ts=8
+autocmd BufNewFile,BufRead /usr/include/**,/usr/lib/**
+			\ if expand('%:t') !~ '\.' | set ft=cpp ts=8 | else | set ts=8 | endif
 autocmd BufNewFile,BufRead /home/patrick/src/coreutils/** set ts=8
 autocmd BufNewFile,BufRead /home/patrick/workspace/programming-challenges/**
 			\ set expandtab
