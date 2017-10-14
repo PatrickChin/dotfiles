@@ -14,9 +14,12 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-markdown'
 	Plug 'tpope/vim-repeat'
+	Plug 'jiangmiao/auto-pairs'
 	Plug 'maxbrunsfeld/vim-emacs-bindings'
 	Plug 'vim-scripts/a.vim'
 	Plug 'Ron89/thesaurus_query.vim'
+	Plug 'chrisbra/Colorizer'
+	Plug 'sfiera/vim-emacsmodeline'
 
 	Plug 'honza/vim-snippets'
 	Plug 'rbonvall/snipmate-snippets-bib'
@@ -24,6 +27,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-pandoc/vim-pandoc'
 	Plug 'lervag/vimtex'
 	Plug 'davidhalter/jedi-vim'
+	Plug 'zchee/deoplete-jedi'
 	Plug 'Valloric/YouCompleteMe'
 	Plug 'ervandew/eclim'
 
@@ -43,19 +47,21 @@ let g:airline_theme='base16_ocean'
 
 " youcompleteme
 let g:ycm_auto_trigger=0
-" let g:ycm_confirm_extra_conf=1
-" let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf1.py'
-let g:ycm_key_list_select_completion=['<C-n>']
-let g:ycm_key_list_previous_completion=['<C-p>']
+let g:ycm_confirm_extra_conf=1
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+let g:ycm_key_list_select_completion=['<C-n>', '<Tab>']
+let g:ycm_key_list_previous_completion=['<C-p>', '<S-Tab>']
 let g:ycm_warning_symbol='>'
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_add_preview_to_completeopt=1
 
 " eclim
 let g:EclimCompletionMethod='omnifunc'
 
 " utilsnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
 
 " vimtex
 let g:tex_flavor='latex'
@@ -65,6 +71,7 @@ let g:vimtex_latexmk_background=1
 
 " jedi
 let g:jedi#force_py_version=3
+let g:jedi#completions_enabled=0
 
 " }}}
 
@@ -153,7 +160,6 @@ nnoremap <leader>s :source %<cr>
 nnoremap <leader><S-s> :source %<cr>:PlugInstall<cr>
 
 
-nnoremap <silent> <Leader>yy :YcmOn<CR>
 nnoremap <silent> <Leader>yd :YcmCompleter GetDoc<CR>
 nnoremap <silent> <Leader>yf :YcmCompleter FixIt<CR>
 nnoremap <silent> <Leader>yi :YcmCompleter GoToInclude<CR>
@@ -194,9 +200,10 @@ autocmd Filetype markdown nnoremap <buffer> <leader>ll :!pandoc % -o notes.html 
 autocmd FileType matlab setlocal commentstring=\%%s
 autocmd FileType cmake setlocal commentstring=\#%s
 
-autocmd BufNewFile,BufRead /usr/include/**,/usr/lib/**
-			\ if expand('%:t') !~ '\.' | set ft=cpp ts=8 | else | set ts=8 | endif
-autocmd BufNewFile,BufRead /home/patrick/src/coreutils/** set ts=8
+" autocmd BufNewFile,BufRead /usr/include/**,/usr/lib/**
+" 			\ if expand('%:t') !~ '\.' | set ft=cpp ts=8 | else | set ts=8 | endif
+autocmd BufNewFile,BufRead /usr/include/**,/usr/lib/**,
+			\/home/patrick/src/coreutils/**  set ts=8
 autocmd BufNewFile,BufRead /home/patrick/workspace/programming-challenges/**
 			\ set expandtab
 autocmd BufNewFile,BufRead /home/patrick/workspace/sptr-analysis/**

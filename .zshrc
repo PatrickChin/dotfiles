@@ -38,9 +38,10 @@ function swap()
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
+alias emacs="emacs -nw"
 alias firmwarereboot="sudo systemctl reboot --firmware-setup"
 alias cpycm="cp ~/.vim/.ycm_extra_conf.py ."
-alias cpnum="echo '0747 430 4048' | xsel -i -b"
+alias cpnum="echo '0746 430 4048' | xsel -i -b"
 alias info="info --vi-keys"
 alias za=zathura
 alias ra=ranger

@@ -12,6 +12,6 @@ fi
 
 [ -f ~/.xprofile ] && . ~/.xprofile
 
-# export GTK_OVERLAY_SCROLLING=0
+export GTK_OVERLAY_SCROLLING=0
 exec i3
 
