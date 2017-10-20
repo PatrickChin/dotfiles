@@ -13,5 +13,14 @@ fi
 [ -f ~/.xprofile ] && . ~/.xprofile
 
 export GTK_OVERLAY_SCROLLING=0
-exec i3
+
+session=${1:-i3}
+case $session in
+    i3|i3wm           ) exec i3;;
+    kde               ) exec startkde;;
+    gnome             ) exec gnome-session;;
+    xfce|xfce4        ) exec startxfce4;;
+    # No known session, try to run it as command
+    *                 ) exec $1;;
+esac
 

@@ -8,32 +8,36 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-	Plug 'tpope/vim-sensible'
-	Plug 'tpope/vim-surround'
-	Plug 'tpope/vim-commentary'
-	Plug 'tpope/vim-fugitive'
-	Plug 'tpope/vim-markdown'
-	Plug 'tpope/vim-repeat'
-	Plug 'jiangmiao/auto-pairs'
-	Plug 'maxbrunsfeld/vim-emacs-bindings'
-	Plug 'vim-scripts/a.vim'
-	Plug 'Ron89/thesaurus_query.vim'
-	Plug 'chrisbra/Colorizer'
-	Plug 'sfiera/vim-emacsmodeline'
 
-	Plug 'honza/vim-snippets'
-	Plug 'rbonvall/snipmate-snippets-bib'
-	Plug 'SirVer/ultisnips'
-	Plug 'vim-pandoc/vim-pandoc'
-	Plug 'lervag/vimtex'
-	Plug 'davidhalter/jedi-vim'
-	Plug 'zchee/deoplete-jedi'
-	Plug 'Valloric/YouCompleteMe'
-	Plug 'ervandew/eclim'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-vinegar'
 
-	Plug 'nanotech/jellybeans.vim'
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/a.vim'
+Plug 'Ron89/thesaurus_query.vim'
+Plug 'chrisbra/Colorizer'
+
+Plug 'honza/vim-snippets'
+Plug 'rbonvall/snipmate-snippets-bib'
+Plug 'SirVer/ultisnips'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'lervag/vimtex'
+Plug 'davidhalter/jedi-vim'
+Plug 'zchee/deoplete-jedi'
+Plug 'Valloric/YouCompleteMe'
+
+Plug 'nanotech/jellybeans.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 call plug#end()
 
 " }}}

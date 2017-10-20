@@ -15,27 +15,30 @@ bindkey -M menuselect 'j' vi-down-line-or-history # bottom
 
 # just type '...' to get '../..'
 rationalise-dot() {
-local MATCH
-if [[ $LBUFFER =~ '(^|/| |	|'$'\n''|\||;|&)\.\.$' ]]; then
-  LBUFFER+=/
-  zle self-insert
-  zle self-insert
-else
-  zle self-insert
-fi
+	local MATCH
+	if [[ $LBUFFER =~ '(^|/| |	|'$'\n''|\||;|&)\.\.$' ]]; then
+		LBUFFER+=/
+		zle self-insert
+		zle self-insert
+	else
+		zle self-insert
+	fi
 }
 zle -N rationalise-dot
 bindkey . rationalise-dot
 # without this, typing a . aborts incremental history search
 bindkey -M isearch . self-insert
 
-function swap()
-{
-    local TMPFILE=tmp.$$
-    mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE $2
+swap() {
+	local TMPFILE=tmp.$$
+	mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE $2
 }
 
-export VISUAL=nvim
+if [ -f  /etc/profile.d/fzf.zsh ]; then
+	source /etc/profile.d/fzf.zsh
+fi
+
+export VISUAL=vim
 export EDITOR="$VISUAL"
 
 alias emacs="emacs -nw"
