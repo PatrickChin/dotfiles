@@ -1,10 +1,7 @@
-
 autoload -Uz promptinit
 promptinit
 prompt grml
-zstyle ':prompt:grml:left:setup' items newline\
-	change-root user at host path vcs newline\
-	percent
+zstyle ':prompt:grml:left:setup' items change-root user at host path vcs newline percent
 
 
 # use the vi navigation keys (hjkl) besides cursor keys in menu completion
@@ -46,6 +43,6 @@ alias firmwarereboot="sudo systemctl reboot --firmware-setup"
 alias cpycm="cp ~/.vim/.ycm_extra_conf.py ."
 alias cpnum="echo '0746 430 4048' | xsel -i -b"
 alias info="info --vi-keys"
-alias za=zathura
-alias ra=ranger
+alias za="zathura"
+alias ra="ranger"
 
