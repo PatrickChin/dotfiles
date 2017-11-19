@@ -1,0 +1,30 @@
+
+set selection-clipboard clipboard
+set guioptions sv
+set scroll-page-aware true
+
+
+map d scroll half-down
+map u scroll half-up
+map <C-d> toggle_page_mode
+map f toggle_fullscreen
+map b toggle_statusbar
+
+map [fullscreen] d scroll half-down
+map [fullscreen] u scroll half-up
+map [fullscreen] <C-d> toggle_page_mode
+map [fullscreen] f toggle_fullscreen
+map [fullscreen] b toggle_statusbar
+
+
+set font "Inconsolata 12"
+
+set scrollbar-fg gray
+set scrollbar-bg lightgray
+set statusbar-fg black
+set statusbar-bg lightgray
+
+set recolor-darkcolor gray
+set recolor-lightcolor lightgray
+set recolor-keephue "true"
+

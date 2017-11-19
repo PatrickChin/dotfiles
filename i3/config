@@ -1,0 +1,217 @@
+
+font xft:Inconsolata 12
+# font pango:DejaVu Sans 11
+
+set $mod Mod4
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+workspace_layout stacking
+hide_edge_borders both
+# new_window none
+# new_float none
+
+# use neither window title nor border
+bindsym $mod+u border toggle
+
+exec --no-startup-id ~/.fehbg
+exec --no-startup-id i3-sensible-terminal -e cmus
+exec --no-startup-id "python /home/patrick/.config/playerctl/playerctl-listen.py &"
+workspace 10 output DP-2
+
+# kill focused window
+bindsym $mod+q kill
+bindsym $mod+Shift+q kill
+
+bindsym Print --release exec scrot -s -e 'mv $f ~/pictures/shots/'
+bindsym Shift+Print --release exec scrot -u -e 'mv $f ~/pictures/shots/'
+
+# pulse audio mixer
+bindsym Mod5+periodcentered exec "pamixer -i 5 ; pkill -RTMIN+10 i3blocks"
+bindsym Mod5+horizconnector exec "pamixer -d 5 ; pkill -RTMIN+10 i3blocks"
+bindsym Mod5+mu             exec "pamixer -t   ; pkill -RTMIN+10 i3blocks"
+
+bindsym $mod+period exec "pamixer -i 5 ; pkill -RTMIN+10 i3blocks"
+bindsym $mod+comma  exec "pamixer -d 5 ; pkill -RTMIN+10 i3blocks"
+bindsym $mod+m      exec "pamixer -t   ; pkill -RTMIN+10 i3blocks"
+
+bindsym XF86MonBrightnessUp   exec "xbacklight -inc 5 ; pkill -RTMIN+10 i3blocks"
+bindsym XF86MonBrightnessDown exec "xbacklight -dec 5 ; pkill -RTMIN+10 i3blocks"
+
+bindsym Mod5+dead_tilde     exec "playerctl next"
+bindsym Mod5+dead_diaeresis exec "playerctl previous"
+bindsym Mod5+dead_grave     exec "playerctl play-pause"
+bindsym Mod5+Shift+division exec "playerctl volume 0.1+ ; pkill -RTMIN+10 i3blocks"
+bindsym Mod5+Shift+multiply exec "playerctl volume 0.1- ; pkill -RTMIN+10 i3blocks"
+
+bindsym $mod+bracketright  exec "playerctl next"
+bindsym $mod+bracketleft   exec "playerctl previous"
+bindsym $mod+numbersign    exec "playerctl play-pause"
+bindsym $mod+Shift+period  exec "playerctl volume 0.1+ ; pkill -RTMIN+10 i3blocks"
+bindsym $mod+Shift+comma   exec "playerctl volume 0.1- ; pkill -RTMIN+10 i3blocks"
+
+bindsym $mod+Return exec --no-startup-id "rofi -show drun"
+bindsym $mod+Shift+Return exec --no-startup-id \
+    "rofi -show drun -run-command 'gksu {cmd}'"
+
+bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+
+bindsym --release button2 kill
+bindsym --whole-window $mod+button2 kill
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# Toggle between stacking/tabbed/splith/splitv
+bindsym $mod+x layout toggle all
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+p focus parent
+
+# focus the child container
+bindsym $mod+o focus child
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# reload the configuration file
+# bindsym $mod+Shift+c exec "cat .config/i3/colors .config/i3/base > .config/i3/config && i3-msg reload"
+bindsym $mod+Shift+c exec i3-msg reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec i3-msg exit
+bindsym $mod+Mod1+l exec "i3lock -f -i '/media/pictures/dl/Gateway to Heaven.jpg'"
+bindsym $mod+Shift+BackSpace exec "i3lock -f -i '/media/pictures/dl/Gateway to Heaven.jpg' && systemctl suspend"
+bindsym $mod+Shift+Escape exec systemctl poweroff
+bindsym $mod+Shift+Delete exec systemctl reboot --firmware-setup
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+
+    bindsym Shift+h resize shrink width 18 px or 18 ppt
+    bindsym Shift+j resize grow height 18 px or 18 ppt
+    bindsym Shift+k resize shrink height 18 px or 18 ppt
+    bindsym Shift+l resize grow width 18 px or 18 ppt
+
+    bindsym h resize shrink width 4 px or 4 ppt
+    bindsym j resize grow height 4 px or 4 ppt
+    bindsym k resize shrink height 4 px or 4 ppt
+    bindsym l resize grow width 4 px or 4 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+bindsym $mod+Mod1+Return exec i3-sensible-terminal
+bindsym $mod+Mod1+r exec i3-sensible-terminal -e ranger
+bindsym $mod+Mod1+c exec --no-startup-id "urxvt -e cmus ; pkill -RTMIN+12 i3blocks"
+bindsym $mod+Mod1+f exec firefox-nightly
+bindsym $mod+Mod1+g exec google-chrome-stable
+bindsym $mod+Mod1+t exec thunderbird-nightly
+bindsym $mod+Mod1+s exec "spotify ; pkill -RTMIN+12 i3blocks"
+bindsym $mod+Mod1+k exec keepassx2
+bindsym $mod+Mod1+v exec vlc
+
+assign [class="^URxvt$" title="cmus"] 8
+assign [class="^Lollypop$"] 8
+for_window [class="Spotify"] move to workspace 8
+
+# no_focus [class="^Mathematica$"]
+# no_focus [class="^Vlc$"]
+
+
+bindsym $mod+Mod1+Shift+f exec killall firefox-nightly
+bindsym $mod+Mod1+Shift+g exec killall chrome
+
+# $i3-theme-window
+# class                 border  backgr. text    indicator
+client.focused          #0088CC #0088CC #ffffff #dddddd
+client.focused_inactive #0C2D3C #0C2D3C #888888 #484e50
+client.unfocused        #333333 #333333 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+
+bar {
+    status_command i3blocks
+    tray_output none
+    # verbose yes
+
+    colors {
+        background #000000
+        statusline #dddddd
+        separator  #666666
+        focused_workspace  #0088CC #0088CC #ffffff
+        active_workspace   #333333 #333333 #888888
+        inactive_workspace #333333 #333333 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+    }
+
+}
+

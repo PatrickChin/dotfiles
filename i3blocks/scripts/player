@@ -1,0 +1,51 @@
+#! /usr/bin/bash
+
+# pctl="playerctl"
+pctl="playerctl --player=$BLOCK_INSTANCE"
+plstatus=$($pctl status)
+
+# to lowercase
+BLOCK_INSTANCE="${BLOCK_INSTANCE,,}"
+
+case $BLOCK_BUTTON in
+    1)
+    if [ $plstatus != "Not available" ]; then
+	$pctl play-pause
+    elif [ -n "$RUN_CMD" ]; then
+	$RUN_CMD &>/dev/null &!
+    else
+	$BLOCK_INSTANCE &>/dev/null &!
+    fi; exit ;;
+# exits here so the status update is called by the playerctl-listener
+2) $pctl previous; exit ;;
+3) $pctl next; exit ;;
+4) $pctl volume 0.1+;; # scroll up, increase
+5) $pctl volume 0.1-;; # scroll down, decrease
+esac
+
+function get_status {
+    if [ "$plstatus" == "Not available" ]; then
+	echo "$BLOCK_INSTANCE"
+    elif [ "$plstatus" == "Stopped" ]; then
+	echo "$BLOCK_INSTANCE - Stopped"
+    elif [ "$plstatus" == "Paused" ] || [ "$plstatus" == "Playing" ]; then
+	artist=$($pctl metadata artist)
+	song=$($pctl metadata title)
+	volume=$(bc <<< "$($pctl volume)*100/1")
+	# if [ -z "$artist" ]; then artist="Unknown"; fi
+	# if [ -z "$song" ]; then song="Unknown"; fi
+	echo "$artist - $song ($plstatus $volume%)"
+    else
+	echo "playerctl status \"$plstatus\" is not recognised"
+    fi
+}
+
+txt=$(get_status)
+len=$(expr length "$txt")
+if (( $len < 2 )); then
+    txt="$len "+$(get_status)
+    echo $txt
+fi
+
+echo $txt
+

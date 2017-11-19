@@ -1,0 +1,138 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/lib/i3blocks/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+# Generic media player support
+#
+# This displays "ARTIST - SONG" if a music is playing.
+# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
+
+# [player]
+# command=~/.config/i3blocks/scripts/player
+# instance=Lollypop
+# interval=5
+# signal=12
+
+[player]
+command=~/.config/i3blocks/scripts/player
+instance=spotify
+interval=once
+signal=12
+
+[player]
+command=RUN_CMD="urxvt -e cmus" ~/.config/i3blocks/scripts/player
+instance=cmus
+interval=once
+signal=12
+
+[disk]
+label=MEDIA
+instance=/media
+interval=30
+
+[disk]
+label=HOME
+instance=/home
+interval=30
+
+[disk]
+label=SYS
+instance=/
+interval=30
+
+[iface]
+instance=wlp2s0
+color=#00FF00
+interval=30
+separator=false
+
+# [iface]
+# instance=wlp0s20f0u5
+# color=#00FF00
+# interval=30
+# separator=false
+
+# [wifi]
+# instance=wlp0s20f0u5
+# interval=10
+# separator=false
+
+[wifi]
+instance=wlp2s0
+interval=10
+separator=false
+
+[bandwidth]
+instance=wlp2s0
+interval=5
+
+# [bandwidth]
+# instance=enp3s0
+# interval=5
+
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage]
+label=CPU
+interval=5
+separator=false
+
+[load_average]
+label=LOAD
+interval=10
+
+# Support multiple chips, though lm-sensors.
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[temperature]
+label=TEMP
+interval=10
+
+# [keyindicator]
+# instance=CAPS
+# interval=once
+# signal=11
+
+# [kbd]
+# label=KBD
+# command=onboard
+# # interval=once
+
+[time]
+command=~/workspace/date-persist/date-persist
+# command=~/.config/i3blocks/scripts/date-persist
+interval=persist
+
+[volume]
+label=VOL
+command=~/.config/i3blocks/scripts/volume
+interval=once
+signal=10
+separator_block_width=0
+

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+volume() {
+    if [[ $(pamixer --get-mute) == "true" ]];
+    then
+        echo "MUTE";
+    else
+        echo "$(pamixer --get-volume)%";
+    fi
+}
+
+case $BLOCK_BUTTON in
+  3) pamixer -t ;;      # right click, mute/unmute
+  4) pamixer -u -i 5 ;; # scroll up, increase
+  5) pamixer -u -d 5 ;; # scroll down, decrease
+esac
+
+volume
