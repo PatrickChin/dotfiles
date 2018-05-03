@@ -42,13 +42,13 @@ markup=none
 [player]
 command=~/.config/i3blocks/scripts/player
 instance=spotify
-interval=once
+interval=2
 signal=12
 
 [player]
 command=RUN_CMD="urxvt -e cmus" ~/.config/i3blocks/scripts/player
 instance=cmus
-interval=once
+interval=2
 signal=12
 
 [disk]
@@ -67,29 +67,29 @@ instance=/
 interval=30
 
 [iface]
-instance=wlp2s0
+instance=eth0
 color=#00FF00
 interval=30
 separator=false
 
-# [iface]
-# instance=wlp0s20f0u5
-# color=#00FF00
-# interval=30
-# separator=false
+[bandwidth]
+instance=eth0
+interval=5
+separator=true
 
-# [wifi]
-# instance=wlp0s20f0u5
-# interval=10
-# separator=false
+[iface]
+instance=wlp4s0
+color=#00FF00
+interval=30
+separator=false
 
 [wifi]
-instance=wlp2s0
+instance=wlp4s0
 interval=10
 separator=false
 
 [bandwidth]
-instance=wlp2s0
+instance=wlp4s0
 interval=5
 
 # [bandwidth]
@@ -123,6 +123,24 @@ interval=10
 # label=KBD
 # command=onboard
 # # interval=once
+
+# Battery indicator
+#
+# The battery instance defaults to 0.
+[battery]
+label=BAT
+interval=30
+
+
+# Battery indicator
+#
+# The battery instance defaults to 0.
+[brightness]
+label=BRI
+command=printf '%.0f%%' $(bc -l <<< "100 * $(brightnessctl g) / $(brightnessctl m)")
+interval=30
+signal=10
+
 
 [time]
 command=~/workspace/date-persist/date-persist

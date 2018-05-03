@@ -27,9 +27,9 @@ URxvt*color14: #bddbdb
 URxvt*color7: #d9d9d9
 URxvt*color15: #ffffff
 
-URxvt*font: xft:Inconsolata\ for\ powerline:regular:pixelsize=17
-URxvt*imFont: xft:Inconsolata\ for\ powerline:regular:pixelsize=17
-URxvt*boldFont: xft:Inconsolata\ for\ powerline:regular:pixelsize=17
+URxvt*font: xft:Inconsolata:regular:pixelsize=19
+URxvt*imFont: xft:Inconsolata:regular:pixelsize=19
+URxvt*boldFont: xft:Inconsolata:regular:pixelsize=19
 
 URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
 URxvt.url-select.launcher: /usr/bin/xdg-open

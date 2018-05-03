@@ -31,6 +31,21 @@ swap() {
 	mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE $2
 }
 
+if [ -f /usr/share/fzf/key-bindings.zsh ]; then
+	source /usr/share/fzf/key-bindings.zsh
+fi
+
+if [ -f /usr/share/fzf/completion.zsh ]; then
+	source /usr/share/fzf/completion.zsh
+fi
+
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+
 if [ -f  /etc/profile.d/fzf.zsh ]; then
 	source /etc/profile.d/fzf.zsh
 fi
@@ -45,4 +60,7 @@ alias cpnum="echo '0746 430 4048' | xsel -i -b"
 alias info="info --vi-keys"
 alias za="zathura"
 alias ra="ranger"
+alias ag='\ag --pager="less -XFR"'
+
+alias wu="source /usr/bin/virtualenvwrapper.sh && workon uxb"
 

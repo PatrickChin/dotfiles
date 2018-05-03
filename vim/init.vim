@@ -9,21 +9,26 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-sensible'		" Don't really know what's in here to be honest
+" Plug 'tpope/vim-sensible'		" Don't really know what's in here to be honest
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-unimpaired'		" [ and ] (on and off) bindings for things
+" Plug 'tpope/vim-unimpaired'		" [ and ] (on and off) bindings for things
 Plug 'tpope/vim-fugitive'		" Git integration
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'			" Auto-detect shift and tab width
 Plug 'tpope/vim-rsi'			" Emacs mappings for insert and command modes
 Plug 'tpope/vim-eunuch'			" UNIX shell commands
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 Plug 'sjl/gundo.vim'			" Undo tree
 Plug 'sfiera/vim-emacsmodeline'
 Plug 'vim-scripts/a.vim'		" swap between header and source file
+Plug 'francoiscabrol/ranger.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf.vim'
 
-" Plug 'scrooloose/nerdtree'
+Plug 'google/vim-maktaba'
+" Plug 'google/vim-codefmt'
+
 Plug 'Ron89/thesaurus_query.vim'
 Plug 'chrisbra/Colorizer'
 
@@ -31,13 +36,16 @@ Plug 'honza/vim-snippets'
 Plug 'rbonvall/snipmate-snippets-bib'
 Plug 'SirVer/ultisnips'
 
-Plug 'leafgarland/typescript-vim'
-Plug 'tpope/vim-markdown'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'tpope/vim-markdown'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'lervag/vimtex'
 Plug 'davidhalter/jedi-vim'
+" Plug 'jmcantrell/vim-virtualenv'
 " Plug 'zchee/deoplete-jedi'	" I don't know what this is
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'keith/swift.vim'
+Plug 'bumaociyuan/vim-swift'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -50,12 +58,13 @@ call plug#end()
 " Plugin Variables {{{
 
 " airline
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='base16_ocean'
 
 " youcompleteme
 let g:ycm_auto_trigger=0
+let g:ycm_python_binary_path = 'python'
 " let g:ycm_confirm_extra_conf=0
 " let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
 let g:ycm_key_list_select_completion=['<C-n>', '<Tab>']
@@ -81,6 +90,9 @@ let g:vimtex_latexmk_background=1
 let g:jedi#force_py_version=3
 let g:jedi#completions_enabled=0
 
+" in your plugin constants configuration section
+let g:virtualenv_auto_activate = 1
+
 " }}}
 
 " General {{{
@@ -100,13 +112,14 @@ set nowrap
 set ignorecase
 set smartcase
 
-set autochdir
+" set autochdir
 set autoread
 set autoindent
 set hlsearch
 set incsearch
 set cursorline
 set cursorcolumn
+set tags=./tags,tags;$HOME
 
 set list
 set listchars=tab:>-,trail:-
@@ -124,8 +137,8 @@ set wildignore+=*.aux,*.lof,*.lot,*.fls,*.out,*.toc,*.fmt,*.fot,*.cb,*.cb2
 set dictionary+=/usr/share/dict/words
 
 set foldenable
-" set foldmethod=marker
-" set foldmarker={{{,}}}
+set foldmethod=marker
+set foldmarker={,}
 set foldlevelstart=99
 set foldnestmax=10
 set nostartofline
@@ -137,32 +150,33 @@ set softtabstop=4
 set modelines=3
 
 set guioptions-=T
-set guifont=Inconsolata\ 12
+set guifont=Inconsolata\ 13
 
 " }}}
 
 " Mappings {{{
 
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
+" nnoremap ; :
+" nnoremap : ;
+" vnoremap ; :
+" vnoremap : ;
 
 nnoremap j gj
 nnoremap k gk
 
-nnoremap <F2> :Lex<CR>
-" nnoremap <F2> :NERDTreeToggle<CR>
+" nnoremap <F2> :Lex<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-nnoremap <Space> i<Space><Esc>l
-nnoremap <CR> i<CR><Esc>
+" nnoremap <Space> i<Space><Esc>l
+" nnoremap <CR> i<CR><Esc>
 
-nnoremap <leader>ev :e ~/.vim/init.vim<cr>
+nnoremap <leader>ev :e ~/.vimrc<cr>
+nnoremap <leader>ez :e ~/.zshrc<cr>
 nnoremap <leader>ey :e ~/.vim/.ycm_extra_conf.py<cr>
 nnoremap <leader>es :Lex ~/.vim/plugged/vim-snippets/UltiSnips/<cr>
 nnoremap <leader>s :source %<cr>
@@ -177,6 +191,10 @@ nnoremap <silent> <leader>jd :YcmCompleter GoTo<CR>
 nnoremap <silent> <leader>jc :YcmCompleter GoToDeclaration<CR>
 nnoremap <silent> <leader>jf :YcmCompleter GoToDefinition<CR>
 
+nnoremap <silent> <leader>a :Buffers<CR>
+nnoremap <silent> <leader><space> :Files<CR>
+nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+
 vnoremap aa mz<Esc>ggVG
 
 nnoremap <leader>y mzggVGy`z
@@ -189,10 +207,10 @@ cnoremap kj <Esc>
 cnoremap KJ <Esc>
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
-nnoremap <C-x> :bd<CR>
+nnoremap <C-x> :bp<bar>sp<bar>bn<bar>bd<CR>
 nnoremap <C-q> :q<CR>
 
-nnoremap <f12> :!urxvt &<cr>
+nnoremap <silent> <f12> :!urxvt &<cr>
 
 " Not sure who to give credit to for this
 " This command will allow us to save a file we don't have permission to save
@@ -208,6 +226,7 @@ autocmd FileType vim,help setlocal keywordprg=:help
 
 autocmd BufNewFile,BufFilePre,BufRead *.sty set filetype=tex
 autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufFilePre,BufRead *.mm set filetype=objcpp
 autocmd Filetype markdown nnoremap <buffer> <leader>ll :!pandoc % -o notes.html --mathjax -s
 
 autocmd FileType c,cpp setlocal commentstring=//%s

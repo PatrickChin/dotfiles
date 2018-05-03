@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# setxkbmap gb basic ctrl:swapcaps
+setxkbmap gb basic ctrl:swapcaps
 xset r rate 200 30
 xset -dpms
 xset s off

@@ -1,3 +1,3 @@
 export AURDEST=~/aur
-export VISUAL=nvim
+export VISUAL=vim
 export EDITOR="$VISUAL"
