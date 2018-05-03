@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#! /usr/bin/env bash
 
 
 configdirs="i3 i3blocks vim zathura"
