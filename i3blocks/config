@@ -67,6 +67,17 @@ instance=/
 interval=30
 
 [iface]
+instance=enp0s20f0u6
+color=#00FF00
+interval=30
+separator=false
+
+[bandwidth]
+instance=enp0s20f0u6
+interval=5
+separator=true
+
+[iface]
 instance=eth0
 color=#00FF00
 interval=30

@@ -39,6 +39,10 @@ bindsym $mod+m      exec "pamixer -t   ; pkill -RTMIN+10 i3blocks"
 bindsym XF86MonBrightnessUp   exec "brightnessctl s 5%+ ; pkill -RTMIN+10 i3blocks"
 bindsym XF86MonBrightnessDown exec "brightnessctl s 5%- ; pkill -RTMIN+10 i3blocks"
 
+bindsym XF86AudioNext  exec "playerctl next"
+bindsym XF86AudioPause exec "playerctl pause"
+bindsym XF86AudioPlay  exec "playerctl play"
+
 bindsym Mod5+dead_tilde     exec "playerctl next"
 bindsym Mod5+dead_diaeresis exec "playerctl previous"
 bindsym Mod5+dead_grave     exec "playerctl play-pause"
@@ -127,16 +131,16 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # switch to workspace
-bindsym Mod5+1 workspace 1
-bindsym Mod5+2 workspace 2
-bindsym Mod5+3 workspace 3
-bindsym Mod5+4 workspace 4
-bindsym Mod5+5 workspace 5
-bindsym Mod5+6 workspace 6
-bindsym Mod5+7 workspace 7
-bindsym Mod5+8 workspace 8
-bindsym Mod5+9 workspace 9
-bindsym Mod5+0 workspace 10
+bindsym Mod5+onesuperior   workspace 1
+bindsym Mod5+twosuperior   workspace 2
+bindsym Mod5+threesuperior workspace 3
+bindsym Mod5+EuroSign      workspace 4
+bindsym Mod5+onehalf       workspace 5
+bindsym Mod5+threequarters workspace 6
+bindsym Mod5+braceleft     workspace 7
+bindsym Mod5+bracketleft   workspace 8
+bindsym Mod5+bracketright  workspace 9
+bindsym Mod5+braceright    workspace 10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -158,8 +162,8 @@ bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec i3-msg exit
-bindsym $mod+Mod1+l exec "i3lock -c 0d1926 -f -i '/media/pictures/dl/Gateway to Heaven.jpg'"
-bindsym $mod+Shift+BackSpace exec "i3lock -c 0d1926 -f -i '/media/pictures/dl/Gateway to Heaven.jpg' && systemctl suspend"
+bindsym $mod+Mod1+l exec "i3lock -c 4286f4 -f"
+bindsym $mod+Shift+BackSpace exec "i3lock -c 4286f4 -f && systemctl suspend"
 bindsym $mod+Shift+Escape exec systemctl poweroff
 bindsym $mod+Shift+Delete exec systemctl reboot --firmware-setup
 

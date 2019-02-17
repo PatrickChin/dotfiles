@@ -3,6 +3,8 @@ promptinit
 prompt grml
 zstyle ':prompt:grml:left:setup' items change-root user at host path vcs newline percent
 
+setopt HIST_IGNORE_ALL_DUPS
+setopt NO_BEEP
 
 # use the vi navigation keys (hjkl) besides cursor keys in menu completion
 bindkey -M menuselect 'h' vi-backward-char        # left
@@ -56,11 +58,12 @@ export EDITOR="$VISUAL"
 alias emacs="emacs -nw"
 alias firmwarereboot="sudo systemctl reboot --firmware-setup"
 alias cpycm="cp ~/.vim/.ycm_extra_conf.py ."
-alias cpnum="echo '0746 430 4048' | xsel -i -b"
+alias cpnum="echo '0746 430 4048' | xsel -i -b" # I guess this number is out there in the public ...
 alias info="info --vi-keys"
 alias za="zathura"
 alias ra="ranger"
 alias ag='\ag --pager="less -XFR"'
 
-alias wu="source /usr/bin/virtualenvwrapper.sh && workon uxb"
+alias workon_uxb="source /usr/bin/virtualenvwrapper.sh && workon uxb"
+alias workon_ate="source /usr/bin/virtualenvwrapper.sh && workon ate"
 
