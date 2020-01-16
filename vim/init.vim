@@ -21,6 +21,10 @@ Plug 'tpope/vim-eunuch'			" UNIX shell commands
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-markdown'
 
+Plug 'bogado/file-line'
+
+" Plug 'jlanzarotta/bufexplorer'
+Plug 'airblade/vim-gitgutter'
 Plug 'sfiera/vim-emacsmodeline'
 
 Plug 'sjl/gundo.vim'			" Undo tree
@@ -28,6 +32,8 @@ Plug 'sjl/gundo.vim'			" Undo tree
 " Plug 'vim-scripts/a.vim'		" swap between header and source file
 Plug 'francoiscabrol/ranger.vim'
 " Plug 'scrooloose/nerdtree'
+
+Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 
 Plug 'google/vim-maktaba'		" ??
@@ -117,6 +123,7 @@ colorscheme jellybeans
 
 set nobackup
 set noswapfile
+set backupcopy=yes
 
 set colorcolumn=100
 
@@ -135,8 +142,8 @@ set noeol
 set autoindent
 set hlsearch
 " set incsearch
-set cursorline
-set cursorcolumn
+" set cursorline
+" set cursorcolumn
 set tags=./tags,tags;$HOME
 
 set list
@@ -155,7 +162,7 @@ set wildignore+=*.aux,*.lof,*.lot,*.fls,*.out,*.toc,*.fmt,*.fot,*.cb,*.cb2
 "set dictionary+=/usr/share/dict/words
 
 set foldenable
-" set foldmethod=syntax
+set foldmethod=syntax
 set foldmarker={,}
 set foldlevelstart=10
 set foldnestmax=10
@@ -224,8 +231,8 @@ vnoremap aa mz<Esc>ggVG
 inoremap kj <Esc>
 cnoremap kj <Esc>
 cnoremap KJ <Esc>
-" nnoremap <C-n> :bn<CR>
-" nnoremap <C-p> :bp<CR>
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
 nnoremap <C-x> :bd<CR>:bn<CR>
 " nnoremap <C-x> :bd<CR>
 " nnoremap <C-q> :q<CR>
@@ -243,7 +250,7 @@ cnoremap w!1 w !sudo tee % >/dev/null
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
-  \   'git grep --column --line-number --color=always '.shellescape(<q-args>), 0, <bang>0)
+  \   'git grep --line-number --color=always '.shellescape(<q-args>), 0, <bang>0)
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -270,6 +277,9 @@ autocmd FileType sql setlocal commentstring=--%s
 autocmd FileType c,cpp setlocal commentstring=//%s
 autocmd FileType matlab setlocal commentstring=\%%s
 autocmd FileType cmake setlocal commentstring=\#%s
+
+autocmd Filetype xml  if getfsize(@%) > 1000000 | setlocal syntax=OFF | endif
+autocmd Filetype json if getfsize(@%) > 1000000 | setlocal syntax=OFF | endif
 
 "" autocmd BufNewFile,BufRead /usr/include/**,/usr/lib/**
 "" 			\ if expand('%:t') !~ '\.' | set ft=cpp ts=8 | else | set ts=8 | endif

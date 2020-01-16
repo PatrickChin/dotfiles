@@ -1,4 +1,4 @@
-Xft.dpi: 96
+Xft.dpi: 115
 Xft.antialias: true
 Xft.rgba: rgb
 Xft.hinting: true
@@ -31,18 +31,15 @@ URxvt*font: xft:Inconsolata:regular:pixelsize=19
 URxvt*imFont: xft:Inconsolata:regular:pixelsize=19
 URxvt*boldFont: xft:Inconsolata:regular:pixelsize=19
 
-URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
-URxvt.url-select.launcher: /usr/bin/xdg-open
-URxvt.url-select.underline: true
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.perl-ext-common: clipboard-osc,searchable-scrollback,font-size
 
 URxvt*intensityStyles: false
 URxvt*scrollstyle: plain
 URxvt*scrollBar_right: true
 URxvt*thickness: 10
 
+
+URxvt*saveLines: 100000
 URxvt*scrollTtyOutput: false
 URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true

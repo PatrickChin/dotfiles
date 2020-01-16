@@ -48,9 +48,7 @@ zle -N edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
-if [ -f  /etc/profile.d/fzf.zsh ]; then
-	source /etc/profile.d/fzf.zsh
-fi
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
@@ -60,10 +58,9 @@ alias firmwarereboot="sudo systemctl reboot --firmware-setup"
 alias cpycm="cp ~/.vim/.ycm_extra_conf.py ."
 alias cpnum="echo '0746 430 4048' | xsel -i -b" # I guess this number is out there in the public ...
 alias info="info --vi-keys"
-alias za="zathura"
-alias ra="ranger"
 alias ag='\ag --pager="less -XFR"'
 
 alias workon_uxb="source /usr/bin/virtualenvwrapper.sh && workon uxb"
 alias workon_ate="source /usr/bin/virtualenvwrapper.sh && workon ate"
 
+source $HOME/uxb/cms_vars.sh
