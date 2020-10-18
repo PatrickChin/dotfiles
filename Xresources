@@ -27,9 +27,9 @@ URxvt*color14: #bddbdb
 URxvt*color7: #d9d9d9
 URxvt*color15: #ffffff
 
-URxvt*font: xft:Inconsolata:regular:pixelsize=19
-URxvt*imFont: xft:Inconsolata:regular:pixelsize=19
-URxvt*boldFont: xft:Inconsolata:regular:pixelsize=19
+URxvt*font: xft:Inconsolata:regular:pixelsize=18
+URxvt*imFont: xft:Inconsolata:regular:pixelsize=18
+URxvt*boldFont: xft:Inconsolata:regular:pixelsize=18
 
 URxvt.perl-ext-common: clipboard-osc,searchable-scrollback,font-size
 

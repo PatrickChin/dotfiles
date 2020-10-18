@@ -1,17 +1,26 @@
 #! /usr/bin/env bash
 
+# set -x
 
 configdirs="i3 i3blocks vim zathura"
-dotfiles="xinitrc xprofile Xresources zshenv zshrc vim"
+dotfiles="xinitrc xprofile Xresources zshenv zshrc"
 
 for d in $configdirs; do
-	echo ln -s ./$d ~/.config/$d
-	ln -s $PWD/$d ~/.config/$d
+	if [ ! -d ~/.config/$d ] ; then
+		ln -s $PWD/$d ~/.config/$d
+	else
+		echo "Dir ~/.config/$d already exists, skipping"
+	fi
 done
 
 for f in $dotfiles; do
-	echo ln -s ./$f ~/.$f
-	ln -s $PWD/$f ~/.$f
+	if [ ! -f ~/.$f ] ; then
+		ln -s $PWD/$f ~/.$f
+	else
+		echo "File ~/.$f already exists, skipping"
+	fi
 done
 
-ln -s $PWD/vim/init.vim ~/.vimrc
+if [ ! -f ~/.$f ] ; then
+	ln -s $PWD/vim/init.vim ~/.vimrc
+fi

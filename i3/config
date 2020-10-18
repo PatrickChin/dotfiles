@@ -1,6 +1,6 @@
 
-font xft:Inconsolata 12
-# font pango:DejaVu Sans 14
+font xft:Inconsolata 11
+# font pango:DejaVu Sans Mono 14
 
 set $mod Mod4
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -14,9 +14,9 @@ hide_edge_borders both
 # use neither window title nor border
 bindsym $mod+u border toggle
 
-# exec --no-startup-id ~/.fehbg
-exec --no-startup-id python /home/patrick/.config/i3blocks/scripts/playerctl-listen.py
-exec --no-startup-id /home/patrick/.screenlayout/upper-right.sh
+exec --no-startup-id ~/.fehbg
+# exec --no-startup-id python /home/patrick/.config/i3blocks/scripts/playerctl-listen.py
+# exec --no-startup-id /home/patrick/.screenlayout/upper-right.sh
 # workspace 1 output eDP-2
 # workspace 8 output DP-2-2
 
@@ -24,36 +24,36 @@ exec --no-startup-id /home/patrick/.screenlayout/upper-right.sh
 bindsym $mod+q kill
 bindsym $mod+Shift+q kill
 
-bindsym Print --release exec scrot -s -e 'mv $f ~/Pictures/shots/'
-bindsym Shift+Print --release exec scrot -u -e 'mv $f ~/Pictures/shots/'
+bindsym Print --release exec scrot -s -e 'mv $f ~/pictures/shots/'
+bindsym Shift+Print --release exec scrot -u -e 'mv $f ~/pictures/shots/'
 
 # pulse audio mixer
-bindsym Mod5+periodcentered exec "pamixer -i 5 ; pkill -RTMIN+10 i3blocks"
-bindsym Mod5+horizconnector exec "pamixer -d 5 ; pkill -RTMIN+10 i3blocks"
-bindsym Mod5+mu             exec "pamixer -t   ; pkill -RTMIN+10 i3blocks"
+bindsym Mod5+periodcentered exec "pulsemixer --change-volume +5 ; pkill -RTMIN+10 i3blocks"
+bindsym Mod5+horizconnector exec "pulsemixer --change-volume -5 ; pkill -RTMIN+10 i3blocks"
+bindsym Mod5+mu             exec "pulsemixer --toggle-mute      ; pkill -RTMIN+10 i3blocks"
 
-bindsym $mod+period exec "pamixer -i 5 ; pkill -RTMIN+10 i3blocks"
-bindsym $mod+comma  exec "pamixer -d 5 ; pkill -RTMIN+10 i3blocks"
-bindsym $mod+m      exec "pamixer -t   ; pkill -RTMIN+10 i3blocks"
+bindsym $mod+period exec "pulsemixer --change-volume +5 ; pkill -RTMIN+10 i3blocks"
+bindsym $mod+comma  exec "pulsemixer --change-volume -5 ; pkill -RTMIN+10 i3blocks"
+bindsym $mod+m      exec "pulsemixer --toggle-mute      ; pkill -RTMIN+10 i3blocks"
 
 bindsym XF86MonBrightnessUp   exec "brightnessctl s 5%+ ; pkill -RTMIN+10 i3blocks"
 bindsym XF86MonBrightnessDown exec "brightnessctl s 5%- ; pkill -RTMIN+10 i3blocks"
 
-bindsym XF86AudioNext  exec "playerctl next"
-bindsym XF86AudioPause exec "playerctl pause"
-bindsym XF86AudioPlay  exec "playerctl play"
+bindsym XF86AudioNext  exec "playerctl --player=spotify next ; pkill -RTMIN+12 i3blocks"
+bindsym XF86AudioPause exec "playerctl --player=spotify pause ; pkill -RTMIN+12 i3blocks"
+bindsym XF86AudioPlay  exec "playerctl --player=spotify play ; pkill -RTMIN+12 i3blocks"
 
-bindsym Mod5+dead_tilde     exec "playerctl next"
-bindsym Mod5+dead_diaeresis exec "playerctl previous"
-bindsym Mod5+dead_grave     exec "playerctl play-pause"
-bindsym Mod5+Shift+division exec "playerctl volume 0.1+ ; pkill -RTMIN+10 i3blocks"
-bindsym Mod5+Shift+multiply exec "playerctl volume 0.1- ; pkill -RTMIN+10 i3blocks"
+bindsym Mod5+dead_tilde     exec "playerctl --player=spotify next ; pkill -RTMIN+12 i3blocks"
+bindsym Mod5+dead_diaeresis exec "playerctl --player=spotify previous ; pkill -RTMIN+12 i3blocks"
+bindsym Mod5+dead_grave     exec "playerctl --player=spotify play-pause ; pkill -RTMIN+12 i3blocks"
+bindsym Mod5+Shift+division exec "playerctl --player=spotify volume 0.1+ ; pkill -RTMIN+10 i3blocks"
+bindsym Mod5+Shift+multiply exec "playerctl --player=spotify volume 0.1- ; pkill -RTMIN+10 i3blocks"
 
-bindsym $mod+bracketright  exec "playerctl next"
-bindsym $mod+bracketleft   exec "playerctl previous"
-bindsym $mod+numbersign    exec "playerctl play-pause"
-bindsym $mod+Shift+period  exec "playerctl volume 0.1+ ; pkill -RTMIN+10 i3blocks"
-bindsym $mod+Shift+comma   exec "playerctl volume 0.1- ; pkill -RTMIN+10 i3blocks"
+bindsym $mod+bracketright  exec "playerctl --player=spotify next ; pkill -RTMIN+12 i3blocks"
+bindsym $mod+bracketleft   exec "playerctl --player=spotify previous ; pkill -RTMIN+12 i3blocks"
+bindsym $mod+numbersign    exec "playerctl --player=spotify play-pause ; pkill -RTMIN+12 i3blocks"
+bindsym $mod+Shift+period  exec "playerctl --player=spotify volume 0.1+ ; pkill -RTMIN+10 i3blocks"
+bindsym $mod+Shift+comma   exec "playerctl --player=spotify volume 0.1- ; pkill -RTMIN+10 i3blocks"
 
 bindsym $mod+Return exec --no-startup-id "rofi -show drun"
 bindsym $mod+Shift+Return exec --no-startup-id \
@@ -187,16 +187,17 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-bindsym $mod+Mod1+Return exec i3-sensible-terminal
-bindsym $mod+Mod1+Shift+Return exec urxvt -e ssh pc1.patchin.uxb.ciscolabs.com -Y
-bindsym $mod+Mod1+r exec i3-sensible-terminal -e ranger
+bindsym $mod+Mod1+Return exec urxvt
+bindsym $mod+Mod1+Shift+Return exec urxvt -e ssh pc2.lal.cisco.com -Y
+bindsym $mod+Mod1+r exec urxvt -e ranger
 bindsym $mod+Mod1+c exec --no-startup-id "urxvt -e cmus ; pkill -RTMIN+12 i3blocks"
-#bindsym $mod+Mod1+p exec firefox -P default
-bindsym $mod+Mod1+f exec firefox
-bindsym $mod+Mod1+g exec google-chrome-stable
+bindsym $mod+Mod1+p exec firefox -P home
+bindsym $mod+Mod1+f exec firefox -P work
+bindsym $mod+Mod1+g exec chromium
+# bindsym $mod+Mod1+g exec optirun -b primus google-chrome-stable
 bindsym $mod+Mod1+t exec thunderbird-nightly
 bindsym $mod+Mod1+s exec "spotify ; pkill -RTMIN+12 i3blocks"
-bindsym $mod+Mod1+k exec keepassx2
+bindsym $mod+Mod1+k exec keepassx
 bindsym $mod+Mod1+v exec vlc
 
 # assign [class="^URxvt$" title="cmus"] 1

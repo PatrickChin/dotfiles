@@ -4,7 +4,7 @@
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
 				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	autocmd VimEnter * PlugInstall --sync | source ~/.vim/init.vim
 endif
 
 call plug#begin('~/.vim/plugged')
@@ -21,7 +21,7 @@ Plug 'tpope/vim-eunuch'			" UNIX shell commands
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-markdown'
 
-Plug 'bogado/file-line'
+" Plug 'bogado/file-line'
 
 " Plug 'jlanzarotta/bufexplorer'
 Plug 'airblade/vim-gitgutter'
@@ -29,11 +29,11 @@ Plug 'sfiera/vim-emacsmodeline'
 
 Plug 'sjl/gundo.vim'			" Undo tree
 
-" Plug 'vim-scripts/a.vim'		" swap between header and source file
+Plug 'vim-scripts/a.vim'		" swap between header and source file
 Plug 'francoiscabrol/ranger.vim'
-" Plug 'scrooloose/nerdtree'
-
-Plug '~/.fzf'
+Plug 'scrooloose/nerdtree'
+"
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 Plug 'google/vim-maktaba'		" ??
@@ -47,7 +47,7 @@ Plug 'SirVer/ultisnips'
 
 " Plug 'leafgarland/typescript-vim'
 " Plug 'vim-pandoc/vim-pandoc'
-" Plug 'lervag/vimtex'
+Plug 'lervag/vimtex'
 " Plug 'davidhalter/jedi-vim'
 " Plug 'jmcantrell/vim-virtualenv'
 " Plug 'zchee/deoplete-jedi'	" I don't know what this is
@@ -115,6 +115,10 @@ let g:jedi#completions_enabled=0
 " in your plugin constants configuration section
 let g:virtualenv_auto_activate=1
 
+let g:netrw_fastbrowse=0
+
+let g:fzf_preview_window = ''
+
 " }}}
 
 " General {{{
@@ -130,10 +134,15 @@ set colorcolumn=100
 set mouse=a
 set hidden
 set number
-set relativenumber
 set nowrap
 set ignorecase
 set smartcase
+set relativenumber
+set sidescroll=10
+
+set synmaxcol=512
+let c_curly_error=0
+syntax sync minlines=50
 
 set lazyredraw
 set noeol
@@ -144,7 +153,7 @@ set hlsearch
 " set incsearch
 " set cursorline
 " set cursorcolumn
-set tags=./tags,tags;$HOME
+set tags=tags,./tags
 
 set list
 set listchars=tab:>-,trail:-
@@ -162,7 +171,7 @@ set wildignore+=*.aux,*.lof,*.lot,*.fls,*.out,*.toc,*.fmt,*.fot,*.cb,*.cb2
 "set dictionary+=/usr/share/dict/words
 
 set foldenable
-set foldmethod=syntax
+set foldmethod=indent
 set foldmarker={,}
 set foldlevelstart=10
 set foldnestmax=10
@@ -172,11 +181,12 @@ set nostartofline
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
+" set expandtab
 
 "set modelines=3
 
 set guioptions-=T
-set guifont=Inconsolata\ 13
+set guifont=Courier\ 10
 
 " }}}
 
@@ -213,13 +223,14 @@ nnoremap <silent> <leader>yd :YcmCompleter GetDoc<CR>
 nnoremap <silent> <leader>yf :YcmCompleter FixIt<CR>
 nnoremap <silent> <leader>yi :YcmCompleter GoToInclude<CR>
 nnoremap <silent> <leader>yt :YcmCompleter GetType<CR>
+nnoremap <silent> <leader>yr :YcmCompleter GoToReferences<CR>
+nnoremap <silent> <leader>yn :YcmCompleter RefactorRename<space>
 nnoremap <silent> <leader>jd :YcmCompleter GoTo<CR>
 nnoremap <silent> <leader>jc :YcmCompleter GoToDeclaration<CR>
 nnoremap <silent> <leader>jf :YcmCompleter GoToDefinition<CR>
+nnoremap <silent> <leader>jl :YcmForceCompileAndDiagnostics<CR>
 
-nnoremap <silent> <leader>a :Buffers<CR>
-nnoremap <silent> <leader><space> :Files<CR>
-nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+nnoremap <leader>gw :GG <C-R><C-W>
 
 vnoremap aa mz<Esc>ggVG
 
@@ -233,11 +244,10 @@ cnoremap kj <Esc>
 cnoremap KJ <Esc>
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
-nnoremap <C-x> :bd<CR>:bn<CR>
-" nnoremap <C-x> :bd<CR>
+nnoremap <C-x> :bd<CR>
 " nnoremap <C-q> :q<CR>
 
-nnoremap <silent> <f12> :!i3-sensible-terminal & disown<cr>
+nnoremap <silent> <f12> :!urxvt & disown<cr>
 
 " Not sure who to give credit to for this
 " This command will allow us to save a file we don't have permission to save
@@ -245,12 +255,12 @@ nnoremap <silent> <f12> :!i3-sensible-terminal & disown<cr>
 cnoremap w!! w !sudo tee % >/dev/null
 cnoremap w!1 w !sudo tee % >/dev/null
 
+" command! -bang -nargs=? GFiles
+"   \ call fzf#vim#gitfiles(<q-args>, {'options': '--no-preview'}, <bang>0)
 
 " Command for git grep
-" - fzf#vim#grep(command, with_column, [options], [fullscreen])
 command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number --color=always '.shellescape(<q-args>), 0, <bang>0)
+  \ call fzf#vim#grep('git grep --line-number --color=always '.shellescape(<q-args>), 0, <bang>0)
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -259,13 +269,16 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-nnoremap <Leader>w :Rg <C-r><C-w><CR>
-
+" nnoremap <silent> <leader>w :Rg <C-r><C-w><CR>
+nnoremap <silent> <leader>a :Buffers<CR>
+nnoremap <silent> <leader><space> :GFiles<CR>
+" nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
 
 " }}}
 
 " Autocmds {{{
 
+autocmd FileType netrw setl bufhidden=delete
 autocmd FileType vim,help setlocal keywordprg=:help
 
 " autocmd BufNewFile,BufFilePre,BufRead *.sty set filetype=tex

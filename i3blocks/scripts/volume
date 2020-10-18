@@ -1,18 +1,19 @@
 #!/bin/bash
 
 volume() {
-    if [[ $(pamixer --get-mute) == "true" ]];
+    vol=$(pulsemixer --get-volume | cut -d " " -f1);
+    if [ $(pulsemixer --get-mute) == 1 ];
     then
-        echo "MUTE";
+      printf "MUTE%3d%%" $vol
     else
-        echo "$(pamixer --get-volume)%";
+      printf "VOL %3d%%" $vol
     fi
 }
 
 case $BLOCK_BUTTON in
-  3) pamixer -t ;;      # right click, mute/unmute
-  4) pamixer -u -i 5 ;; # scroll up, increase
-  5) pamixer -u -d 5 ;; # scroll down, decrease
+  3) pulsemixer --toggle-mute ;;      # right click, mute/unmute
+  4) pulsemixer --change-volume +5 ;; # scroll up, increase
+  5) pulsemixer --change-volume -5 ;; # scroll down, decrease
 esac
 
 volume

@@ -6,3 +6,20 @@ xset -dpms
 xset s off
 xset s noblank
 
+# hax for stupid cisco vpn
+
+if ! pgrep -x "clamd" > /dev/null
+then
+	~/clamd &
+fi
+
+if ! pgrep -x "ampdaemon" > /dev/null
+then
+	~/ampdaemon &
+fi
+
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
+export __GLVND_DISALLOW_PATCHING=1

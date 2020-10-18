@@ -39,16 +39,25 @@ markup=none
 # interval=5
 # signal=12
 
-# [player]
-# command=~/.config/i3blocks/scripts/player
+# [mediaplayer]
 # instance=spotify
 # interval=2
 # signal=12
 
+[player]
+command=~/.config/i3blocks/scripts/player
+instance=spotify
+interval=5
+signal=12
+
+# [player]
+# command=playerctl --player=spotify metadata --format '{{ artist }} - {{ title }} ({{ status }})' --follow
+# interval=persist
+
 # [player]
 # command=RUN_CMD="urxvt -e cmus" ~/.config/i3blocks/scripts/player
 # instance=cmus
-# interval=2
+# interval=1
 # signal=12
 
 # [disk]
@@ -66,35 +75,50 @@ label=SYS
 instance=/
 interval=30
 
-[iface]
-instance=enp2s0
-color=#00FF00
-interval=30
-separator=false
-
-[bandwidth]
-instance=enp2s0
-interval=5
-separator=true
-
 # [iface]
-# instance=wlp4s0
+# instance=wlp0s20f3
 # color=#00FF00
 # interval=30
 # separator=false
 
 # [wifi]
-# instance=wlp4s0
+# instance=wlp0s20f3
 # interval=10
 # separator=false
 
 # [bandwidth]
-# instance=wlp4s0
+# instance=wlp0s20f3
 # interval=5
 
+# [iface]
+# instance=enp0s31f6
+# color=#00FF00
+# interval=30
+# separator=false
+
 # [bandwidth]
-# instance=enp3s0
+# instance=enp0s31f6
 # interval=5
+# separator=true
+
+
+[iface]
+instance=enx3ce1a1c06237
+color=#00FF00
+interval=30
+separator=false
+
+[bandwidth]
+instance=enx3ce1a1c06237
+interval=5
+separator=true
+
+[iface]
+label=VPN
+instance=cscotun0
+color=#00FF00
+interval=30
+separator=true
 
 # The script may be called with -w and -c switches to specify thresholds,
 # see the script for details.
@@ -114,32 +138,27 @@ interval=10
 label=TEMP
 interval=10
 
-# [keyindicator]
-# instance=CAPS
-# interval=once
-# signal=11
+[keyindicator]
+instance=CAPS
+interval=once
+signal=11
 
 # [kbd]
 # label=KBD
 # command=onboard
 # # interval=once
 
-## Battery indicator
-##
-## The battery instance defaults to 0.
-#[battery]
-#label=BAT
-#interval=30
+[battery]
+label=BAT
+interval=30
 
 
-## Battery indicator
-##
-## The battery instance defaults to 0.
-#[brightness]
-#label=BRI
-#command=printf '%.0f%%' $(bc -l <<< "100 * $(brightnessctl g) / $(brightnessctl m)")
-#interval=30
-#signal=10
+[bright]
+label=BRI
+command=echo $(echo "100 * $(brightnessctl g) / $(brightnessctl m)" | bc)%
+# command=echo $(calc "100 * $(brightnessctl g) / $(brightnessctl m)")%
+interval=10
+signal=10
 
 
 [time]
@@ -148,9 +167,8 @@ command=~/workspace/date-persist/date-persist
 interval=persist
 
 [volume]
-label=VOL
-# command=~/.config/i3blocks/scripts/volume
+# label=VOL
+command=~/.config/i3blocks/scripts/volume
 interval=once
 signal=10
 separator_block_width=0
-
